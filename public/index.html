@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Chat com Socket.io</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <form id="chat">
+      <input
+        type="text"
+        name="username"
+        id="username"
+        placeholder="Digite seu nome de usuário"
+      />
+      <div class="messages"></div>
+      <input
+        type="text"
+        name="message"
+        id="message"
+        placeholder="Digite sua mensagem"
+      />
+      <button type="submit">
+        <img src="https://i.imgur.com/WJyFhcP.png" />
+      </button>
+    </form>
+
+    <script type="text/javascript">
+      var socket = io("http://localhost:3000");
+
+      function renderMessage(message) {
+        $(".messages").append(
+          `<div class="message"><strong>${message.user}</strong>: ${message.message}</div>`
+        );
+      }
+
+      // Recebendo mensagens anteriores, já enviadas
+      socket.on("previousMessage", function(messages) {
+        for (message of messages) {
+          // Procurando as messagens enviadas
+          // Enviando as messagens pra tela, renderizando
+          renderMessage(message);
+        }
+      });
+
+      // Recebendo a mensagem broadcast do backend
+      socket.on("receivedMessage", function(message) {
+        renderMessage(message); // Renderizando a messagem em tela
+      });
+
+      $("#chat").submit(async function(event) {
+        event.preventDefault();
+
+        var user = $("input[name=username]").val();
+        var message = $("input[name=message]").val();
+
+        // Verificando se existe messagem e usuario
+        if (user.length && message.length) {
+          var messageObject = {
+            user,
+            message
+          };
+
+          await renderMessage(messageObject);
+
+          // Emit envia o objeto, messagem
+          socket.emit("sendMessage", messageObject);
+
+          $("#message").val("");
+        }
+      });
+    </script>
+  </body>
+</html>

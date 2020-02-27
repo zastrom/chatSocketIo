@@ -1,0 +1,95 @@
+html,
+body {
+  height: 100%;
+  background-color: #1e1d22;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+
+#chat {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: Roboto, sans-serif;
+}
+
+input {
+  width: 95%;
+  border: 1px solid #7159c3;
+  border-radius: 3px;
+  background-color: #24222e;
+  color: #fff;
+  height: 50px;
+  padding: 0 20px;
+  font-size: 14px;
+  font-family: Roboto, sans-serif;
+}
+
+button {
+  width: 300px;
+  height: 80px;
+  font-size: 17px;
+  background: #7159c3;
+  text-align: center;
+  border: 2px solid #7159c3;
+  border-radius: 40px;
+  font-weight: bold;
+  padding: 10px;
+  color: #fff;
+  margin-top: 10px;
+  font-family: Roboto, sans-serif;
+  box-shadow: 1px 1px 4px rgb(49, 49, 49);
+  outline: none;
+}
+
+button:hover {
+  background: #a287fa;
+  border-color: #a287fa;
+}
+
+button:active {
+  width: 295px;
+  height: 75px;
+  font-size: 16px;
+  background: #a287fa;
+  border: 1px solid #a287fa;
+}
+
+button img {
+  width: 50px;
+  height: 40px;
+}
+
+button img:active {
+  width: 45px;
+  height: 35px;
+}
+
+.messages {
+  width: 95%;
+  height: 400px;
+  margin: 20px 0;
+  border: 1px solid #7159c3;
+  background-color: #24222e;
+  border-radius: 3px;
+  color: #fff;
+  padding: 20px;
+  font-family: Roboto, sans-serif;
+}
+
+.messages img {
+  position: relative;
+  top: 6px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #fff;
+  border-radius: 50px;
+}
